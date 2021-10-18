@@ -3,13 +3,15 @@ session_start();
 
 $url = "$_SERVER[REQUEST_SCHEME]://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
+$_SESSION['main'] = $_SERVER['SCRIPT_NAME'];
+
 if (strpos($url, '?') || $_SERVER['PATH_INFO']) {
 
     header("Location: " . $_SERVER['SCRIPT_NAME']);
     exit;
 }
 
-if (!$_SESSION['res'] || empty($_SESSION['res'])) {
+if (!$_SESSION['answer']) {
 
 $n = rand(1, 10);
 $check = 5 * $n;
@@ -27,10 +29,9 @@ $_SESSION['check'] = $check;
 
 <?
 } else {   
-            echo ($_SESSION['res'] === 'true') ? "Вы угадали результат! =)" . "<br>" : "Вы неверно ответили =( Правильный ответ: " . $_SESSION['check'] . "<br>";
+            echo ($_SESSION['answer'] == $_SESSION['check']) ? "Вы угадали результат! =)" . "<br>" : "Вы неверно ответили =( Правильный ответ: " . $_SESSION['check'] . "<br>";
             echo "<a href=" . $_SERVER['PHP_SELF'] . "><button>Повторить</button></a>";
             unset($_SESSION['answer']);
-            unset($_SESSION['res']);
             unset($_SESSION['check']);
 }
 

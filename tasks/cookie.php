@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $psw = password_hash(trim(strip_tags($_POST['psw'])), PASSWORD_DEFAULT);
 
     if ($_POST['submit']) {
-        setcookie('user_info', base64_encode(serialize(['name' => $name, 'age' => $age, 'login' => $login, 'psw' => $psw, 'count' => $count])), time()+3600*24*30);
+        setcookie('user_info', base64_encode(serialize(['name' => $name, 'age' => $age, 'login' => $login, 'psw' => $psw, 'count' => 1])), time()+3600*24*30);
     }
     
     if ($_POST['do_logout']) {
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     exit;
 }
 
-if (!$_COOKIE['user_info'] || empty($_COOKIE['user_info'])) {
+if (!$_COOKIE['user_info']) {
 ?>
 
 <form action="<? $_SERVER['PHP_SELF'] ?>" method="post">
@@ -51,14 +51,11 @@ else {
     
     $user_info = unserialize(base64_decode($_COOKIE['user_info']));
 
-    if ($user_info) {
-        if (isset($user_info['count'])) {
+    if ($user_info['count']) {
             $user_info['count'] += 1;
-        } else {
-            $user_info['count'] = 1;
         }
         setcookie("user_info", base64_encode(serialize($user_info)), time()+3600*24*30);
-    }
+    
 
 ?>
 
