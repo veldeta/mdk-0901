@@ -31,16 +31,16 @@ if (!$_COOKIE['user_info']) {
 
 <form action="<? $_SERVER['PHP_SELF'] ?>" method="post">
     <label>ФИО
-        <input type="text" name="name">
+        <input type="text" name="name" required>
     </label>
     <label>Возраст
-        <input type="number" name="age">
+        <input type="number" name="age" min="18" required>
     </label>
     <label>Логин
-        <input type="text" name="login">
+        <input type="text" name="login" required>
     </label>
     <label>Пароль
-        <input type="password" name="psw">
+        <input type="password" name="psw" required>
     </label>
     <input type="submit" name="submit" value="Отправить">
 </form>

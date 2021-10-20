@@ -23,7 +23,7 @@ $_SESSION['check'] = $check;
     <label>n - число от 1 до 10
     <br>
     5 * n = ?
-        <input name="answer" placeholder="Введите результат" type="number" required>
+        <input name="answer" placeholder="Введите результат" min="5" max="50" type="number" required>
         <input name="submit" type="submit" value="Отправить">
 </label>
 
