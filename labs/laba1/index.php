@@ -5,10 +5,17 @@ require_once 'php/function.php';
 
 $page = $_GET['arguments'] ?? $_GET['page'];
 
+if ($_COOKIE['user']) {
+    $user = unserialize(base64_decode($_COOKIE['user']));
+    $ex = 'registration';
+}
+
 if ($page) {
     $keys = array_keys($_GET);
-    
-    validateUrl($keys, $page, $arr);
+
+    validateUrl($keys, $page, $arr, $ex);
+} else {
+    toMain();
 }
 
 ?>
