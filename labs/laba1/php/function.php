@@ -18,23 +18,23 @@ function toMain()
     exit;
 }
 
-function validateUrl($keys, $page, $arr)
+function validateUrl($keys, $page, $arr, $ex)
 {
     if (count($keys) >= 3) {
         toMain();
     }
 
-    if (!array_key_exists($page, $arr)) {
+    if (!array_key_exists($_GET['page'], $arr) || ($_GET['paramets'])
+        ? (array_key_exists($page, $arr))
+        ? !array_key_exists($_GET['page'], $arr[$page]['sub']) : true : '' || $_GET['page'] == $ex
+    ) {
         toMain();
     }
 
     foreach ($keys as $val) {
         $key = $val;
-    }
-
-    if (count($keys) == 1 && $key !== 'page') {
-        toMain();
-    } elseif (count($keys) >= 2 && $key !== 'arguments') {
-        toMain();
+        if ($key != 'page' && $key != 'paramets') {
+            toMain();
+        }
     }
 }
